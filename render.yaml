@@ -19,10 +19,8 @@ services:
         value: app/database/powersched.db
 
   # 2. React + Vite Frontend Static Site
-  - type: web
+  - type: static
     name: powersched-frontend
-    runtime: static
-    plan: free
     branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
