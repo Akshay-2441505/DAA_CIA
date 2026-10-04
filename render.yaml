@@ -18,17 +18,15 @@ services:
       - key: DATABASE_PATH
         value: app/database/powersched.db
 
-  # 2. React + Vite Frontend Static Site
-  - type: static
+  # 2. React + Vite Frontend (served via Node/serve)
+  - type: web
     name: powersched-frontend
+    runtime: node
+    plan: free
     branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
+    startCommand: npx serve -s dist -l $PORT
     envVars:
       - key: VITE_API_URL
         fromService:
